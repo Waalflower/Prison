@@ -1,0 +1,98 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class TextController : MonoBehaviour {
+	
+	public Text text;
+	
+	private enum States {cell, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, freedom};
+	private States myState;
+	
+	// Use this for initialization
+	void Start () 
+	{myState = States.cell;}
+	
+	// Update is called once per frame
+	void Update () {
+		print  (myState);
+		if (myState == States.cell) 				{state_cell();} 
+		else if (myState == States.sheets_0) 		{state_sheets_0();} 
+		else if (myState == States.lock_0) 			{state_lock_0();} 
+		else if (myState == States.mirror)			{state_mirror();} 
+		else if (myState == States.cell_mirror) 	{state_cell_mirror();} 
+		else if (myState == States.sheets_1) 		{state_sheets_1();} 
+		else if (myState == States.lock_1) 			{state_lock_1();} 
+		else if (myState == States.freedom) 		{state_freedom();}
+	}
+	
+	void state_cell () {
+		text.text = "You wake up and find yourself in a dirty prison " +
+			"cell. The room only contains sheets on a bed, a mirror on the wall,  " +
+				"and a door that is locked from the outside. You have to escape, so what would " +
+				"you like to do first?\n\n" +
+				"Press S to view Sheets, M to view Mirror, and L to view Lock." ;
+		if (Input.GetKeyDown(KeyCode.S))			{myState = States.sheets_0;}	
+		else if (Input.GetKeyDown(KeyCode.L))		{myState = States.lock_0;}	
+		else if (Input.GetKeyDown(KeyCode.M))		{myState = States.mirror;}
+		
+	}
+	
+	void state_sheets_0 () {
+		text.text = "Hard to believe you can sleep in these disgusting sheets! " +
+			"Even by prison standards these are pretty bad.\n\n" +
+				"Press R to return to Roaming around your cell." ;
+		if (Input.GetKeyDown(KeyCode.R)) {myState = States.cell;}
+	}
+	
+	void state_lock_0 () {
+		text.text = "You stand in front of a door that is locked from the outside. " +
+			"It looks like you will need something to open the door.\n\n" +
+				"Press R to return to Roaming around your cell." ;
+		if (Input.GetKeyDown(KeyCode.R)) 		{myState = States.cell;}
+	}
+	
+	void state_mirror () {
+		text.text = "There is a dirty mirror hanging on the wall. " +
+			"If you break it, you might be able to use a shard " +
+				"as a makeshift key to open the lock on the door.\n\n" +
+				"Press M to break the Mirror and take a shard of it, or " +
+				"press R to return to Roaming around your cell." ;
+		if (Input.GetKeyDown(KeyCode.M)) 		{myState = States.cell_mirror;} 
+		else if (Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell;
+		}
+	}
+	
+	void state_cell_mirror () {
+		text.text = "Now that you have a shard of the broken mirror, " +
+			"you might be able to shimmy the outside of the lock " +
+				"with it.\n\n" +
+				"Press S to view Sheets or press L to view lock." ;
+		if (Input.GetKeyDown(KeyCode.S)) 		{myState = States.sheets_1;} 
+		else if (Input.GetKeyDown(KeyCode.L)) 	{myState = States.lock_1;}
+	}
+	
+	void state_sheets_1 () {
+		text.text = "These dirty sheets are still of no use to you.\n\n" +
+			"Press R to return to Roaming around your cell." ;
+		if (Input.GetKeyDown(KeyCode.R)) 		{myState = States.cell_mirror;}
+	}
+	
+	void state_lock_1 () {
+		text.text = "Now that you have a piece of the broken mirror, " +
+			"you might be able to shimmy the lock and break free " +
+				"of this prison cell!\n\n" +
+				"Press M to use the Mirror shard to shimmy the lock or " +
+				"press R to return to Roaming around your cell.";
+		if (Input.GetKeyDown(KeyCode.M)) 		{myState = States.freedom;} 
+		else if (Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell_mirror;}
+	}
+	
+	void state_freedom () {
+		text.text = "Thanks to the viewing window on the door being large enough " +
+			"to stick your arm through, you manage to shimmy the door unlock " +
+				"and begin your sprint to freedom!\n\n" +
+				"You have won the game! Congradulations! To play again, press P";
+		if (Input.GetKeyDown(KeyCode.P)) 		{myState = States.cell;}
+	}
+}
