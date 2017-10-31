@@ -4,199 +4,212 @@ using System.Collections;
 
 public class TextController : MonoBehaviour {
 
-	public Text text;
-	
-	private enum States {
-		cell, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, corridor_0,
-		stairs_0, closet_0, door_0, corridor_1, closet_1, stairs_1, corridor_2, 
-		corridor_3, stairs_2, courtyard};
-	private States myState;
-	
-	// Use this for initialization
-	void Start () 
-	{myState = States.cell;}
-	
-	// Update is called once per frame
-	void Update () {
-		print  (myState);
-		if 		(myState == States.cell) 	{cell();} 
-		else if (myState == States.sheets_0) 		{sheets_0();} 
-		else if (myState == States.lock_0) 		{lock_0();} 
-		else if (myState == States.mirror)		{mirror();} 
-		else if (myState == States.cell_mirror) 	{cell_mirror();} 
-		else if (myState == States.sheets_1) 		{sheets_1();} 
-		else if (myState == States.lock_1) 		{lock_1();} 
-		else if (myState == States.corridor_0) 		{corridor_0();}
-		else if (myState == States.stairs_0) 		{stairs_0();}
-		else if (myState == States.closet_0) 		{closet_0();}
-		else if (myState == States.door_0) 		{door_0();}
-		else if (myState == States.corridor_1) 		{corridor_1();}
-		else if (myState == States.closet_1) 		{closet_1();}
-		else if (myState == States.stairs_1) 		{stairs_1();}
-		else if (myState == States.corridor_2) 		{corridor_2();}
-		else if (myState == States.corridor_3) 		{corridor_3();}
-		else if (myState == States.stairs_2) 		{stairs_2();}
-		else if (myState == States.courtyard) 		{courtyard();}
-		
-		
-		}
-	
-	void cell () {
-		text.text = "You wake up and find yourself in a dirty prison " +
-					"cell. The room only contains sheets on a bed, a mirror on the wall,  " +
-					"and a door that is locked from the outside. You have to escape, so what would " +
-					"you like to do first?\n\n" +
-					"Press S to view Sheets, M to view Mirror, and L to view Lock." ;
-		if 		(Input.GetKeyDown(KeyCode.S))		{myState = States.sheets_0;}	
-		else if (Input.GetKeyDown(KeyCode.L))		{myState = States.lock_0;}	
-		else if (Input.GetKeyDown(KeyCode.M))		{myState = States.mirror;}
-			
-	}
-	
-	void sheets_0 () {
-		text.text = "Hard to believe you can sleep in these disgusting sheets! " +
-					"Even by prison standards these are pretty bad.\n\n" +
-					"Press R to return to Roaming around your cell." ;
-		if (Input.GetKeyDown(KeyCode.R)) 		{myState = States.cell;}
-	}
-	
-	void lock_0 () {
-		text.text = "You stand in front of a door that is locked from the outside. " +
-					"It looks like you will need something to open the door.\n\n" +
-					"Press R to return to Roaming around your cell." ;
-		if (Input.GetKeyDown(KeyCode.R)) 		{myState = States.cell;}
-	}
-	
-	void mirror () {
-		text.text = "There is a dirty mirror hanging on the wall. " +
-					"If you break it, you might be able to use a shard " +
-					"as a makeshift key to open the lock on the door.\n\n" +
-					"Press M to break the Mirror and take a shard of it, or " +
-					"press R to return to Roaming around your cell." ;
-		if 		(Input.GetKeyDown(KeyCode.M)) 	{myState = States.cell_mirror;} 
-		else if 	(Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell;
-	}
+    public Text text;
+    
+    private enum States {
+        intro, cell, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, corridor_0,
+        stairs_0, closet_0, door_0, corridor_1, closet_1, stairs_1, corridor_2, 
+        corridor_3, stairs_2, courtyard};
+    private States myState;
+    
+    // Use this for initialization
+    void Start () 
+    {myState = States.intro;}
+    
+    // Update is called once per frame
+    void Update () {
+        print(myState);
+        //if (myState == States.intro)          {intro();}
+        if (myState == States.cell)             {cell();} 
+        else if (myState == States.sheets_0)    {sheets_0();} 
+        else if (myState == States.lock_0)      {lock_0();} 
+        else if (myState == States.mirror)      {mirror();} 
+        else if (myState == States.cell_mirror) {cell_mirror();} 
+        else if (myState == States.sheets_1)    {sheets_1();} 
+        else if (myState == States.lock_1)      {lock_1();} 
+        else if (myState == States.corridor_0)  {corridor_0();}
+        else if (myState == States.stairs_0)    {stairs_0();}
+        else if (myState == States.closet_0)    {closet_0();}
+        else if (myState == States.door_0)      {door_0();}
+        else if (myState == States.corridor_1)  {corridor_1();}
+        else if (myState == States.closet_1)    {closet_1();}
+        else if (myState == States.stairs_1)    {stairs_1();}
+        else if (myState == States.corridor_2)  {corridor_2();}
+        else if (myState == States.corridor_3)  {corridor_3();}
+        else if (myState == States.stairs_2)    {stairs_2();}
+        else if (myState == States.courtyard)   {courtyard();}
+    }
+
+    void intro() {
+        // Requires a monospaced font
+        text.text = "|========================================================================|\n" +
+                    "| PPPPPPPPPPP                                                            |\n" +
+                    "|  PPP     PPP                 ppp                                       |\n" +
+                    "|  PPP     PPP                                                           |\n" +
+                    "|  PPPPPPPPPP    ppppppppp    pppp      pppp     pppppp     pppppppppp   |\n" +
+                    "|  PPP            ppp   ppp    ppp     ppp      ppp  ppp     ppp    ppp  |\n" +
+                    "|  PPP            ppp          ppp      ppppp   ppp  ppp     ppp    ppp  |\n" +
+                    "| PPPPP          ppppp        ppppp    pppp      pppppp     ppppp  ppppp |\n" +
+                    "|========================================================================|\n";
+        if(Input.anyKeyDown) {myState = States.cell;}
+    }
+    
+    void cell () {
+        text.text = "You wake up and find yourself in a dirty prison " +
+                    "cell. The room only contains sheets on a bed, a mirror on the wall,  " +
+                    "and a door that is locked from the outside. You have to escape, so what would " +
+                    "you like to do first?\n\n" +
+                    "Press S to view Sheets, M to view Mirror, and L to view Lock." ;
+        if      (Input.GetKeyDown(KeyCode.S))       {myState = States.sheets_0;}    
+        else if (Input.GetKeyDown(KeyCode.L))       {myState = States.lock_0;}  
+        else if (Input.GetKeyDown(KeyCode.M))       {myState = States.mirror;}
+            
+    }
+    
+    void sheets_0 () {
+        text.text = "Hard to believe you can sleep in these disgusting sheets! " +
+                    "Even by prison standards these are pretty bad.\n\n" +
+                    "Press R to return to Roaming around your cell." ;
+        if (Input.GetKeyDown(KeyCode.R))        {myState = States.cell;}
+    }
+    
+    void lock_0 () {
+        text.text = "You stand in front of a door that is locked from the outside. " +
+                    "It looks like you will need something to open the door.\n\n" +
+                    "Press R to return to Roaming around your cell." ;
+        if (Input.GetKeyDown(KeyCode.R))        {myState = States.cell;}
+    }
+    
+    void mirror () {
+        text.text = "There is a dirty mirror hanging on the wall. " +
+                    "If you break it, you might be able to use a shard " +
+                    "as a makeshift key to open the lock on the door.\n\n" +
+                    "Press M to break the Mirror and take a shard of it, or " +
+                    "press R to return to Roaming around your cell." ;
+        if      (Input.GetKeyDown(KeyCode.M))   {myState = States.cell_mirror;} 
+        else if     (Input.GetKeyDown(KeyCode.R))   {myState = States.cell;
+    }
 }
-	
-	void cell_mirror () {
-		text.text = "Now that you have a shard of the broken mirror, " +
-					"you might be able to shimmy the outside of the lock " +
-					"with it.\n\n" +
-					"Press S to view Sheets or press L to view lock." ;
-		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.sheets_1;} 
-		else if 	(Input.GetKeyDown(KeyCode.L)) 	{myState = States.lock_1;}
-	}
-	
-	void sheets_1 () {
-		text.text = "These dirty sheets are still of no use to you.\n\n" +
-					"Press R to return to Roaming around your cell." ;
-		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell_mirror;}
-	}
-	
-	void lock_1 () {
-		text.text = "Now that you have a piece of the broken mirror, " +
-					"you might be able to shimmy the lock and break free " +
-					"of this prison cell!\n\n" +
-					"Press M to use the Mirror shard to shimmy the lock or " +
-					"press R to return to Roaming around your cell.";
-		if 		(Input.GetKeyDown(KeyCode.M)) 	{myState = States.corridor_0;} 
-		else if 	(Input.GetKeyDown(KeyCode.R)) 	{myState = States.cell_mirror;}
-	}
+    
+    void cell_mirror () {
+        text.text = "Now that you have a shard of the broken mirror, " +
+                    "you might be able to shimmy the outside of the lock " +
+                    "with it.\n\n" +
+                    "Press S to view Sheets or press L to view lock." ;
+        if      (Input.GetKeyDown(KeyCode.S))   {myState = States.sheets_1;} 
+        else if     (Input.GetKeyDown(KeyCode.L))   {myState = States.lock_1;}
+    }
+    
+    void sheets_1 () {
+        text.text = "These dirty sheets are still of no use to you.\n\n" +
+                    "Press R to return to Roaming around your cell." ;
+        if      (Input.GetKeyDown(KeyCode.R))   {myState = States.cell_mirror;}
+    }
+    
+    void lock_1 () {
+        text.text = "Now that you have a piece of the broken mirror, " +
+                    "you might be able to shimmy the lock and break free " +
+                    "of this prison cell!\n\n" +
+                    "Press M to use the Mirror shard to shimmy the lock or " +
+                    "press R to return to Roaming around your cell.";
+        if      (Input.GetKeyDown(KeyCode.M))   {myState = States.corridor_0;} 
+        else if     (Input.GetKeyDown(KeyCode.R))   {myState = States.cell_mirror;}
+    }
 
-	void corridor_0 () {
-		text.text = "You had to break the mirror in the process, but it did get you out of the cell. " +
-					"To your right you see a closet, to your left some stairs going up, " +
-					"and straight ahead you see another door.\n\n" +
-					"Press S for Stairs, C for Closet, and D for Door.";
-		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.stairs_0;}
-		else if 	(Input.GetKeyDown(KeyCode.C)) 	{myState = States.closet_0;}
-		else if 	(Input.GetKeyDown(KeyCode.D)) 	{myState = States.door_0;}
-		
-	}
+    void corridor_0 () {
+        text.text = "You had to break the mirror in the process, but it did get you out of the cell. " +
+                    "To your right you see a closet, to your left some stairs going up, " +
+                    "and straight ahead you see another door.\n\n" +
+                    "Press S for Stairs, C for Closet, and D for Door.";
+        if      (Input.GetKeyDown(KeyCode.S))   {myState = States.stairs_0;}
+        else if     (Input.GetKeyDown(KeyCode.C))   {myState = States.closet_0;}
+        else if     (Input.GetKeyDown(KeyCode.D))   {myState = States.door_0;}
+        
+    }
 
-	void stairs_0 () {
-		text.text = "You begin to climb up the stairs, but at the end of the stairs on the next " +
-					"floor you realize that guards have been posted to block all intruders. " +
-					"Fortunately, they are facing the opposite direction and fail to notice you.\n\n" +
-					"Press R to Return down to the corridor that you came from.";
-		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_0;}
-	}
-	
-	void door_0 () {
-		text.text = "Pulling and pushing on the door gives no results: it is locked. However, " +
-					"you notice a small hairpin on the floor and attempt to use it to lockpick " +
-					"the door. The lock on this door is too sturdy; however, it might work on a " +
-					"more flimsy lock.\n\n" +
-					"Press H to take the Hairpin and continue looking around the corridor.";
-					
-		if 		(Input.GetKeyDown(KeyCode.H)) 	{myState = States.corridor_1;}
-				
-	}
-	
-	void closet_0 () {
-		text.text = "The door to the closet is locked. Should we have to, it looks easy " +
-					"enough to lockpick. If only we can find something...\n\n" + 
-					"Press R to Return to the corridor.";
-		if 		(Input.GetKeyDown(KeyCode.R))	{myState = States.corridor_0;}		 
-			
-		}
-	
-	void corridor_1 () {
-		text.text = "While the main door didn't work, you did get a hairpin out of it. " +
-					"The only two options left here are the stairs and the closet.\n\n" +
-					"Press S to go up the stairs or press C to go to the closet.";
-		if 		(Input.GetKeyDown(KeyCode.S))	{myState = States.stairs_1;}
-		else if 	(Input.GetKeyDown(KeyCode.C))	{myState = States.closet_1;}
-		
-	}
-	
-	void closet_1 () {
-		text.text = "This hairpin might just be able to open the flimsy lock. " +
-					"Lockpicking this with a hairpin will likely destroy it.\n\n" +
-					"Press H to use the Hairpin on the closet or press R to Return to the corridor.";
-		if 		(Input.GetKeyDown(KeyCode.H))	{myState = States.corridor_3;}
-		else if 	(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_1;} 
-	
-	}
+    void stairs_0 () {
+        text.text = "You begin to climb up the stairs, but at the end of the stairs on the next " +
+                    "floor you realize that guards have been posted to block all intruders. " +
+                    "Fortunately, they are facing the opposite direction and fail to notice you.\n\n" +
+                    "Press R to Return down to the corridor that you came from.";
+        if      (Input.GetKeyDown(KeyCode.R))   {myState = States.corridor_0;}
+    }
+    
+    void door_0 () {
+        text.text = "Pulling and pushing on the door gives no results: it is locked. However, " +
+                    "you notice a small hairpin on the floor and attempt to use it to lockpick " +
+                    "the door. The lock on this door is too sturdy; however, it might work on a " +
+                    "more flimsy lock.\n\n" +
+                    "Press H to take the Hairpin and continue looking around the corridor.";
+                    
+        if      (Input.GetKeyDown(KeyCode.H))   {myState = States.corridor_1;}
+                
+    }
+    
+    void closet_0 () {
+        text.text = "The door to the closet is locked. Should we have to, it looks easy " +
+                    "enough to lockpick. If only we can find something...\n\n" + 
+                    "Press R to Return to the corridor.";
+        if      (Input.GetKeyDown(KeyCode.R))   {myState = States.corridor_0;}       
+            
+        }
+    
+    void corridor_1 () {
+        text.text = "While the main door didn't work, you did get a hairpin out of it. " +
+                    "The only two options left here are the stairs and the closet.\n\n" +
+                    "Press S to go up the stairs or press C to go to the closet.";
+        if      (Input.GetKeyDown(KeyCode.S))   {myState = States.stairs_1;}
+        else if     (Input.GetKeyDown(KeyCode.C))   {myState = States.closet_1;}
+        
+    }
+    
+    void closet_1 () {
+        text.text = "This hairpin might just be able to open the flimsy lock. " +
+                    "Lockpicking this with a hairpin will likely destroy it.\n\n" +
+                    "Press H to use the Hairpin on the closet or press R to Return to the corridor.";
+        if      (Input.GetKeyDown(KeyCode.H))   {myState = States.corridor_3;}
+        else if     (Input.GetKeyDown(KeyCode.R))   {myState = States.corridor_1;} 
+    
+    }
 
-	void stairs_1 () {
-		text.text = "No way in hell you can challenge the guards with your new hairpin. " +
-					"Best to return down the stairs for now.\n\n" +
-					"Press R to return down the stairs.";
-		if 		(Input.GetKeyDown(KeyCode.R))	{myState = States.corridor_1;}
-	}
-	
-	void corridor_3 () {
-		text.text = "You open the closet and find a uniform set that the guards wear and instinctively " +
-					"put it on. After putting on the clothes you realize that this is not a closet " +
-					"but a secret passage desending further into darkness.\n\n" +
-					"Press P to go into the secret Passage or press R to Return to the corridor.";
-		if 		(Input.GetKeyDown(KeyCode.R))	{myState = States.corridor_2;}
-		else if 	(Input.GetKeyDown(KeyCode.P))	{myState = States.courtyard;}
+    void stairs_1 () {
+        text.text = "No way in hell you can challenge the guards with your new hairpin. " +
+                    "Best to return down the stairs for now.\n\n" +
+                    "Press R to return down the stairs.";
+        if      (Input.GetKeyDown(KeyCode.R))   {myState = States.corridor_1;}
+    }
+    
+    void corridor_3 () {
+        text.text = "You open the closet and find a uniform set that the guards wear and instinctively " +
+                    "put it on. After putting on the clothes you realize that this is not a closet " +
+                    "but a secret passage desending further into darkness.\n\n" +
+                    "Press P to go into the secret Passage or press R to Return to the corridor.";
+        if      (Input.GetKeyDown(KeyCode.R))   {myState = States.corridor_2;}
+        else if     (Input.GetKeyDown(KeyCode.P))   {myState = States.courtyard;}
 
-	}
+    }
 
-	void corridor_2 () {
-		text.text = "You return to the corridor that you came from. Only places to go: stairs or " +
-					"the secret passage.\n\n" +
-					"Press P to go into the secret Passage or press S to go up the stairs.";
-		if 		(Input.GetKeyDown(KeyCode.S))	{myState = States.stairs_2;}
-		else if 	(Input.GetKeyDown(KeyCode.P))	{myState = States.courtyard;}
-	}
-	
-	void stairs_2 () {
-		text.text = "Now that you are wearing a guard's uniform, you stand a pretty good chance " +
-					"at sneaking past any real guards you might find at the top of the staris. " +
-					"Time to go up and hope for the best...\n\n" +
-					"Until next time! To play again, press P.";
-		if 		(Input.GetKeyDown(KeyCode.P))	{myState = States.cell;}
-	}
-	
-	void courtyard () {
-		text.text = "The darkness going down the secret passage in the closet proved difficult at first, " +
-					"however, after a few minutes of walking you see a light at the end of the tunnel. " +
-					"at the end of that light appears to be a vast courtyard...\n\n" +
-					"Until next time! To play again, press P.";
-		if 		(Input.GetKeyDown(KeyCode.P))	{myState = States.cell;}
-	}
+    void corridor_2 () {
+        text.text = "You return to the corridor that you came from. Only places to go: stairs or " +
+                    "the secret passage.\n\n" +
+                    "Press P to go into the secret Passage or press S to go up the stairs.";
+        if      (Input.GetKeyDown(KeyCode.S))   {myState = States.stairs_2;}
+        else if     (Input.GetKeyDown(KeyCode.P))   {myState = States.courtyard;}
+    }
+    
+    void stairs_2 () {
+        text.text = "Now that you are wearing a guard's uniform, you stand a pretty good chance " +
+                    "at sneaking past any real guards you might find at the top of the staris. " +
+                    "Time to go up and hope for the best...\n\n" +
+                    "Until next time! To play again, press P.";
+        if      (Input.GetKeyDown(KeyCode.P))   {myState = States.cell;}
+    }
+    
+    void courtyard () {
+        text.text = "The darkness going down the secret passage in the closet proved difficult at first, " +
+                    "however, after a few minutes of walking you see a light at the end of the tunnel. " +
+                    "at the end of that light appears to be a vast courtyard...\n\n" +
+                    "Until next time! To play again, press P.";
+        if      (Input.GetKeyDown(KeyCode.P))   {myState = States.cell;}
+    }
 }
